@@ -10,7 +10,7 @@
 | Роль | Виконавець |
 |---|---|
 | **Координатор проєкту (Project Manager)** | GPT-6 Astra |
-| **Аналітик вимог (Business/System Analyst)** | Кравцов Богдан *(єдиний живий учасник команди; системний аналітик рівня Middle)* |
+| **Аналітик вимог (Business/System Analyst)** | Кравцов Богдан *(Middle System Analyst)* |
 | **Технічний спеціаліст (Tech Lead / DevOps)** | Claude 4.8 Opus |
 | **Розробник інтерфейсу (UI/UX Developer)** | Claude Sonnet 4.6 |
 | **Тестувальник (QA Engineer)** | Gemini 3.8 Flash |
