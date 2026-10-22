@@ -10,7 +10,7 @@
 
 | Роль | Виконавець |
 |---|---|
-| **Координатор проєкту (Project Manager)** | GPT-6 Astra |
+| **Координатор проєкту (Project Manager)** | Альона Нікітіна (Викладач з курсу КРПП) |
 | **Аналітик вимог (Business/System Analyst)** | Кравцов Богдан *(Middle System Analyst)* |
 | **Технічний спеціаліст (Tech Lead / DevOps)** | Claude 4.8 Opus |
 | **Розробник інтерфейсу (UI/UX Developer)** | Claude Sonnet 4.6 |
