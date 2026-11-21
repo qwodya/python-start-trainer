@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+    .hero h1 { font-size: 24px; }
+    .options-grid { grid-template-columns: 1fr; }
+    .actions { flex-direction: column; }
+    .btn { width: 100%; }
+}
+@media (max-width: 375px) {
+    .container { padding: 0 12px; }
+    .theory-box, .quiz-card { padding: 18px 14px; }
+    .logo { font-size: 17px; }
+}

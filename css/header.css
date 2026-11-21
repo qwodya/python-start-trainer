@@ -1,0 +1,30 @@
+.site-header {
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 0;
+}
+.header-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary);
+}
+.hero {
+    text-align: center;
+    padding: 40px 0 20px;
+}
+.hero h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+.hero p {
+    color: var(--text-muted);
+    font-size: 16px;
+}

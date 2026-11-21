@@ -1,0 +1,27 @@
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+}
+.option-btn {
+    background: #FFFFFF;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+}
+.option-btn:hover { border-color: var(--primary); background: #F8FAFC; }
+.option-btn.selected { border-color: var(--primary); background: #EFF6FF; color: var(--primary); }
+.feedback-box {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 14px;
+}
+.feedback-box.correct { background: #DCFCE7; color: #166534; border: 1px solid #86EFAC; }
+.feedback-box.wrong { background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; }
