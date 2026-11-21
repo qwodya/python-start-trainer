@@ -5,7 +5,23 @@
     padding: 32px;
     margin: 30px auto;
     max-width: 800px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
+
+.theory-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.theory-tag {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+}
+
 .notice-box {
     background: #FEF3C7;
     border-left: 4px solid #F59E0B;
@@ -13,10 +29,17 @@
     border-radius: 6px;
     margin: 16px 0;
     font-size: 14px;
+    color: #92400E;
 }
+
 .actions {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
     margin-top: 24px;
+}
+
+.btn-sm {
+    padding: 6px 14px;
+    font-size: 13px;
 }

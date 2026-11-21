@@ -12,6 +12,11 @@
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.topic-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
 }
 .topic-icon { font-size: 32px; margin-bottom: 12px; }
 .topic-badge {
@@ -23,6 +28,11 @@
     padding: 4px 10px;
     border-radius: 20px;
     margin-bottom: 10px;
+}
+.badge-done {
+    background: #DCFCE7 !important;
+    color: #166534 !important;
+    border: 1px solid #86EFAC;
 }
 .topic-title { font-size: 18px; margin-bottom: 8px; }
 .topic-desc { color: var(--text-muted); font-size: 14px; margin-bottom: 20px; flex-grow: 1; }

@@ -1,7 +1,8 @@
 // Головний контролер вебзастосунку «PythonStart»
 import { appState } from "./state.js";
-import { renderTopicsCatalog, renderTheoryScreen, renderQuizQuestion } from "./ui.js";
-import { validateAnswer, calculateScorePercentage, quizQuestions } from "./quiz.js";
+import { renderTopicsCatalog, renderTheoryScreen, renderQuizQuestion, renderSummaryScreen } from "./ui.js";
+import { quizQuestions } from "./quiz.js";
+import { fetchDailyTip } from "./api.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const catalogContainer = document.getElementById("topics-grid");
@@ -13,60 +14,68 @@ document.addEventListener("DOMContentLoaded", () => {
         catalogSection.classList.toggle("hidden", name !== "catalog");
         theorySection.classList.toggle("hidden", name !== "theory");
         quizSection.classList.toggle("hidden", name !== "quiz");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    
+    function returnToCatalog() {
+        renderTopicsCatalog(catalogContainer, startTopic);
+        showSection("catalog");
     }
     
     function startTopic(topicId) {
         appState.resetTopic(topicId);
         showSection("theory");
-        renderTheoryScreen(topicId, theorySection, () => {
-            showSection("quiz");
-            loadQuestion();
-        });
-        const backBtn = document.getElementById("btn-back-catalog");
-        if (backBtn) backBtn.addEventListener("click", () => showSection("catalog"));
+        renderTheoryScreen(
+            topicId,
+            theorySection,
+            () => {
+                showSection("quiz");
+                loadQuestion();
+            },
+            returnToCatalog
+        );
     }
     
     function loadQuestion() {
-        renderQuizQuestion(appState.currentTopicId, quizSection, (selected, question) => {
-            const isCorrect = validateAnswer(selected, question.correct);
-            appState.recordAnswer(isCorrect, selected);
-            
-            const feedback = quizSection.querySelector("#feedback-box");
-            feedback.classList.remove("hidden", "correct", "wrong");
-            feedback.classList.add(isCorrect ? "correct" : "wrong");
-            feedback.innerHTML = isCorrect 
-                ? "<strong>Чудово!</strong> Правильна відповідь." 
-                : `<strong>Помилка!</strong> ${question.explanation}`;
-            
-            const submitBtn = quizSection.querySelector("#btn-submit-answer");
-            submitBtn.textContent = "Наступне завдання →";
-            submitBtn.onclick = () => {
-                const total = (quizQuestions[appState.currentTopicId] || quizQuestions.operators).length;
-                if (appState.currentQuestionIndex + 1 < total) {
+        const questions = quizQuestions[appState.currentTopicId] || quizQuestions.operators;
+        renderQuizQuestion(
+            appState.currentTopicId,
+            quizSection,
+            () => {
+                if (appState.currentQuestionIndex + 1 < questions.length) {
                     appState.currentQuestionIndex++;
                     loadQuestion();
                 } else {
-                    showSummary();
+                    renderSummaryScreen(
+                        quizSection,
+                        appState.currentTopicId,
+                        () => startTopic(appState.currentTopicId),
+                        returnToCatalog
+                    );
                 }
-            };
-        });
+            },
+            returnToCatalog
+        );
     }
     
-    function showSummary() {
-        const total = (quizQuestions[appState.currentTopicId] || quizQuestions.operators).length;
-        const percent = calculateScorePercentage(appState.score, total);
-        quizSection.innerHTML = `
-            <div class="summary-card">
-                <h2>Вітаємо! Тему завершено 🎉</h2>
-                <p class="score-display">Ваш результат: <strong>${appState.score}</strong> з <strong>${total}</strong> (${percent}%)</p>
-                <p>${percent >= 80 ? "Відмінний рівень знань! Ви готові до наступної теми." : "Рекомендуємо повторити теоретичний матеріал."}</p>
-                <div class="actions">
-                    <button id="btn-home" class="btn btn-primary">До каталогу тем</button>
-                </div>
-            </div>
-        `;
-        document.getElementById("btn-home").addEventListener("click", () => showSection("catalog"));
-    }
-    
+    // Ініціалізація відкритого REST API щоденної поради (Lab 9)
+    initDailyTip();
+
+    // Первинний рендеринг каталогу
     renderTopicsCatalog(catalogContainer, startTopic);
 });
+
+async function initDailyTip() {
+    const banner = document.getElementById("daily-tip-banner");
+    if (!banner) return;
+    try {
+        const tip = await fetchDailyTip();
+        banner.innerHTML = `
+            <div class="tip-badge">${tip.isFallback ? "Офлайн-порада" : "REST API"}</div>
+            <div class="tip-text"><strong>${tip.setup}</strong> ${tip.punchline}</div>
+        `;
+        banner.classList.remove("hidden");
+    } catch (e) {
+        console.warn("Could not load daily tip:", e);
+    }
+}
