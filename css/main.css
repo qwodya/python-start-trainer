@@ -1,0 +1,72 @@
+@import "./variables.css";
+@import "./header.css";
+@import "./catalog.css";
+@import "./theory.css";
+@import "./quiz.css";
+@import "./responsive.css";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #FFFFFF;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+.btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background-color: #E2E8F0;
+    color: var(--text-main);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.code-block {
+    font-family: var(--font-mono);
+    background-color: #0F172A;
+    color: #F8FAFC;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin: 12px 0;
+    overflow-x: auto;
+    font-size: 14px;
+}
